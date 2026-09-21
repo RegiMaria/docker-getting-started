@@ -1,0 +1,1 @@
+## o código da aplicação (Python + FastAPI)
