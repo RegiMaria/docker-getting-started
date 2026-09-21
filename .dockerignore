@@ -1,1 +1,7 @@
-## https://app.datacamp.com/learn/courses/introduction-to-docker
+__pycache__/
+*.pyc
+.git
+.gitignore
+.env
+venv/
+.venv/

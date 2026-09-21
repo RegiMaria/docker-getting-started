@@ -1,0 +1,18 @@
+# =========================================================
+# 03- requirements.txt
+# =========================================================
+# fastapi - o framework que a gente usa no app.py (from fastapi import FastAPI)
+# uvicorn[standard] - o servidor que efetivamente roda a aplicação
+# (é ele que o CMD do Dockerfile chama). 
+# O [standard] instala umas dependências extras opcionais
+# (melhor performance, suporte a mais recursos) — sem isso ainda funciona,
+# mas é o recomendado. 
+# Por que fixar a versão com ==: sem isso (só fastapi sem versão),
+# toda vez que você desse pip install ou rebuildasse a imagem, poderia vir
+# uma versão diferente - e algo que funcionava pode quebrar sem você ter mudado nada no seu código.
+# Fixando a versão, o build fica reprodutível: hoje, daqui a 6 meses, na sua máquina ou
+# na de outra pessoa, instala exatamente a mesma coisa.
+# =========================================================
+
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
