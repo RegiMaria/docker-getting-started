@@ -1,3 +1,11 @@
+# =========================================================
+# 02- No CMD do dockerfile
+# Dockerfile a gente escreveu uvicorn app:app 
+# o primeiro app é o nome desse arquivo (app.py, sem a extensão),
+# e o segundo app é o nome da variável app = FastAPI() aqui dentro.
+# É por isso que o nome do arquivo importa
+# =========================================================
+
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
