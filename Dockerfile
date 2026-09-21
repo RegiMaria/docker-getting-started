@@ -47,7 +47,7 @@ EXPOSE 5000
 # CMD define o comando que roda quando o CONTAINER É INICIADO
 # (diferente do RUN, que roda durante o BUILD da imagem).
 # O FastAPI não tem um servidor embutido como o Flask tinha
-# (app.run()) — ele precisa de um servidor ASGI. Usamos o
+# (app.run()) - ele precisa de um servidor ASGI. Usamos o
 # "uvicorn" pra isso.
 #
 # uvicorn app:app        -> "app" (arquivo app.py) : "app" (variável FastAPI() dentro do arquivo)
