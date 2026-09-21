@@ -1,4 +1,12 @@
-# 🐳 Docker - Hello World
+<p align="center">
+  <img
+    src="https://github.com/user-attachments/assets/8178e726-5396-4ba2-b71a-f1fbfab1e77f"
+    alt="Banner do projeto"
+    width="100%"
+  />
+</p>
+
+# 🐳 Docker - Seu Hello World 🌸
 
 Projeto simples para estudar Docker do zero: uma aplicação web em
 Python (FastAPI) que mostra "Hello, Docker!" no navegador, rodando
@@ -6,10 +14,11 @@ dentro de um container.
 
 Projeto parte do curso [Introdução ao Docker da DataCamp](https://app.datacamp.com/learn/courses/introduction-to-docker).
 
+
 O foco aqui **não é a aplicação em si** - é entender a mecânica do
-Docker. Depois de dominar esse esqueleto simples, você já sabe
+Docker. Depois de dominar esse esqueleto simples, a gente já vai saber
 empacotar praticamente qualquer projeto Python (uma API, um site,
-um bot).
+um bot). Bora? 🌺
 
 ## Qual problema o Docker resolve
 
@@ -226,3 +235,20 @@ Troque `SEU_USUARIO` pelo seu usuário do GitHub.
 4. Depois disso, avance para o tutorial oficial
    (`docker/getting-started`) - ele ensina volumes, bind mounts,
    redes e Docker Compose, os próximos passos naturais.
+
+
+---
+
+<div align="center">
+
+Se gostou, deixa uma ⭐
+
+<img width="200" alt="Image" src="https://github.com/user-attachments/assets/aca57b06-3ea1-49e4-96fb-b2a00b8f8918" />
+
+</div>
+
+<div align="center">
+Feito com 💙 por RegiMaria
+</div>
+
+<div align="center">
