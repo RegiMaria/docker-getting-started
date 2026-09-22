@@ -1,7 +1,7 @@
 # 📘 Guia: Docker e o projeto Hello World
 
 Este documento explica **por que aprender Docker**, **o que é este
-projeto**, e **cada arquivo** que o compõe — incluindo a ordem em
+projeto**, e **cada arquivo** que o compõe - incluindo a ordem em
 que eles dependem uns dos outros e o motivo dessa ordem.
 
 ---
@@ -17,24 +17,24 @@ desenvolvimento de software:
 > "Na minha máquina funciona."
 
 O Docker resolve isso empacotando a aplicação **junto com tudo que
-ela precisa pra rodar** — sistema, linguagem, bibliotecas, código e
-comando de start — em uma unidade só, chamada **imagem**. Essa
+ela precisa pra rodar** - sistema, linguagem, bibliotecas, código e
+comando de start - em uma unidade só, chamada **imagem**. Essa
 imagem roda de forma idêntica em qualquer lugar que tenha Docker
 instalado: seu notebook, o servidor da empresa, a nuvem (AWS, GCP,
 Azure), o notebook de outro desenvolvedor.
 
 Por isso Docker é considerado uma habilidade básica em DevOps hoje:
 
-- **Portabilidade** — o mesmo pacote roda igual em qualquer ambiente
-- **Isolamento** — cada aplicação roda separada das outras, sem
+- **Portabilidade** - o mesmo pacote roda igual em qualquer ambiente
+- **Isolamento** - cada aplicação roda separada das outras, sem
   conflito de versões de bibliotecas entre projetos diferentes
-- **Padronização de times** — todo mundo do time sobe o projeto com
+- **Padronização de times** - todo mundo do time sobe o projeto com
   o mesmo comando, sem precisar seguir um manual de instalação
   manual, cheio de passos que variam por sistema operacional
-- **Base para orquestração** — ferramentas como Kubernetes,
+- **Base para orquestração** - ferramentas como Kubernetes,
   usadas em produção em larga escala, funcionam gerenciando
   containers. Entender Docker é o primeiro degrau pra chegar lá
-- **Ambientes de CI/CD** — pipelines de teste e deploy automatizado
+- **Ambientes de CI/CD** - pipelines de teste e deploy automatizado
   quase sempre rodam dentro de containers, justamente pela
   consistência que eles garantem
 
@@ -46,7 +46,7 @@ Este é um "Hello World" containerizado: uma aplicação web mínima em
 Python (FastAPI) que responde com uma mensagem simples, empacotada
 em uma imagem Docker.
 
-**O objetivo não é a aplicação em si** — é aprender, na prática, o
+**O objetivo não é a aplicação em si** - é aprender, na prática, o
 fluxo completo de containerizar algo:
 
 1. Escrever a "receita" de como montar a imagem (`Dockerfile`)
@@ -57,7 +57,7 @@ fluxo completo de containerizar algo:
 
 Uma vez que esse fluxo básico esteja internalizado, ele se repete
 (com variações) em praticamente qualquer projeto real que você for
-containerizar depois — só muda a complexidade da aplicação, não a
+containerizar depois - só muda a complexidade da aplicação, não a
 lógica do Docker.
 
 ---
@@ -86,19 +86,19 @@ cima pra baixo, e cada instrução vira uma camada (layer):
 | `COPY requirements.txt .` | Copia só o arquivo de dependências primeiro (ver seção 4, sobre ordem) |
 | `RUN pip install -r requirements.txt` | Executa a instalação das dependências **durante o build** da imagem |
 | `COPY . .` | Copia o restante do código do projeto (o `app.py`) para dentro da imagem |
-| `EXPOSE 5000` | Documenta que a aplicação pretende usar a porta 5000 (não abre a porta sozinho — quem faz isso de fato é o `docker run -p`) |
+| `EXPOSE 5000` | Documenta que a aplicação pretende usar a porta 5000 (não abre a porta sozinho - quem faz isso de fato é o `docker run -p`) |
 | `CMD [...]` | Define o comando executado quando o **container** é iniciado (diferente do `RUN`, que roda só durante o build) |
 
 É o único arquivo, entre todos do projeto, que é **obrigatório** ter
-em qualquer Dockerfile — no mínimo o `FROM`.
+em qualquer Dockerfile - no mínimo o `FROM`.
 
 ### 3.2 `app.py`
 
 O código da aplicação em si. Usa o framework **FastAPI**, que expõe
 uma rota `/` retornando uma mensagem HTML de "Hello, Docker!". Não
 tem `app.run()` no final (diferente de outros frameworks como
-Flask) porque o FastAPI depende de um servidor ASGI externo — o
-**uvicorn** — que é quem efetivamente sobe o servidor. É por isso
+Flask) porque o FastAPI depende de um servidor ASGI externo - o
+**uvicorn** - que é quem efetivamente sobe o servidor. É por isso
 que o `CMD` do Dockerfile chama `uvicorn app:app`, e não `python
 app.py`.
 
@@ -112,7 +112,7 @@ uvicorn[standard]==0.30.6
 ```
 
 As versões são fixadas com `==` para garantir **builds
-reprodutíveis** — sem isso, uma atualização de biblioteca poderia
+reprodutíveis** - sem isso, uma atualização de biblioteca poderia
 quebrar o projeto sem que nenhuma linha de código tivesse mudado.
 
 ### 3.4 `.dockerignore`
@@ -137,7 +137,7 @@ senhas) acabem indo parar dentro da imagem.
 ### 3.5 `.gitignore`
 
 Equivalente ao `.dockerignore`, mas para o **git** em vez do
-Docker — impede que arquivos como a pasta `venv/` (ambiente virtual
+Docker - impede que arquivos como a pasta `venv/` (ambiente virtual
 local) sejam versionados e enviados ao GitHub.
 
 ### 3.6 `README.md`
@@ -151,20 +151,20 @@ projeto para o GitHub.
 ## 4. A ordem de dependência entre os arquivos, e por quê
 
 Os arquivos não têm todos o mesmo "peso" dentro do processo de
-build — alguns dependem de outros existirem primeiro, e a **ordem
+build - alguns dependem de outros existirem primeiro, e a **ordem
 em que aparecem dentro do Dockerfile** afeta diretamente a
 velocidade dos builds seguintes.
 
 ### Ordem lógica de criação
 
-1. **`Dockerfile`** — definido primeiro porque é ele quem referencia
+1. **`Dockerfile`** - definido primeiro porque é ele quem referencia
    todos os outros arquivos (`COPY requirements.txt .`, `COPY . .`)
    e quem define o nome esperado do arquivo principal da aplicação
    (`app:app`, no `CMD`)
-2. **`app.py`** — o código, já que o Dockerfile espera encontrá-lo
-3. **`requirements.txt`** — lista as bibliotecas que o `app.py`
+2. **`app.py`** - o código, já que o Dockerfile espera encontrá-lo
+3. **`requirements.txt`** - lista as bibliotecas que o `app.py`
    importa (`from fastapi import ...`)
-4. **`.dockerignore`** — opcional, mas relevante assim que existir
+4. **`.dockerignore`** - opcional, mas relevante assim que existir
    algo que não deva ir para a imagem (como a venv)
 
 ### Ordem das instruções DENTRO do Dockerfile: por que importa
@@ -188,8 +188,8 @@ anterior:
   refeitas
 
 Se o `COPY . .` (copiar todo o código) viesse **antes** da
-instalação das dependências, qualquer alteração no `app.py` —
-mesmo sem tocar em nenhuma dependência — invalidaria o cache a
+instalação das dependências, qualquer alteração no `app.py` -
+mesmo sem tocar em nenhuma dependência - invalidaria o cache a
 partir dali, obrigando o Docker a reinstalar o FastAPI e o uvicorn
 do zero, a cada build. Em projetos com dezenas de bibliotecas
 pesadas, isso pode custar minutos por build, desnecessariamente.
