@@ -13,7 +13,7 @@ Python (FastAPI) que mostra "Hello, Docker!" no navegador, rodando
 dentro de um container.
 
 Projeto parte do curso [Introdução ao Docker da DataCamp](https://app.datacamp.com/learn/courses/introduction-to-docker).
-
+Leia a Guia do projeto aqui.
 
 O foco aqui **não é a aplicação em si** - é entender a mecânica do
 Docker. Depois de dominar esse esqueleto simples, a gente já vai saber
