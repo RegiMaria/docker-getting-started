@@ -1,6 +1,15 @@
-# 📘 Guia: Docker e o projeto Hello World
+<p align="center">
+  <img
+    width="400"
+    height="200"
+    alt="Banner"
+    src="https://github.com/user-attachments/assets/884165b8-b2e7-45f3-b7ab-2a1f80156d65" 
+  />
+</p>
 
-Este documento explica **por que aprender Docker**, **o que é este
+# 🔷 Docker: Overview
+
+Este documento explica **O que é Docker** e **por que aprender Docker**, **o que é este
 projeto**, e **cada arquivo** que o compõe - incluindo a ordem em
 que eles dependem uns dos outros e o motivo dessa ordem.
 
@@ -22,6 +31,10 @@ comando de start - em uma unidade só, chamada **imagem**. Essa
 imagem roda de forma idêntica em qualquer lugar que tenha Docker
 instalado: seu notebook, o servidor da empresa, a nuvem (AWS, GCP,
 Azure), o notebook de outro desenvolvedor.
+
+
+
+
 
 Por isso Docker é considerado uma habilidade básica em DevOps hoje:
 
